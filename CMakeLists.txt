@@ -20,6 +20,7 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(PCL REQUIRED)
 
 include_directories(
+	include ${catkin_INCLUDE_DIRS}
         ${SWEEP_SDK_PATH}/inc
         ${SWEEP_SDK_PATH}/inc/serial
         ${SWEEP_SDK_PATH}/src
