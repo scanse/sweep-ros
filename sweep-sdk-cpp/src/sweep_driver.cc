@@ -259,8 +259,8 @@ status SweepDriver::resetSweep()
 status SweepDriver::changeMotorSpeed(uint8_t value)
 {
     sweep_response_param_t resp;
-    char cmd[4];
-    char speed[2];
+    char cmd[5];
+    char speed[3];
 
     if (!isConnected())
         return S_FAIL;
