@@ -25,7 +25,7 @@ sudo ldconfig
 
 ## Scanse Sweep ROS Driver and Node
 
-This node is currently publishing a `pointcloud2` msg. This is because the Sweep device does not use fixed azimuth intervals. For more details see the Sweep [theory of operation](THEORY OF OPERATION LINK). Use `sweep2scan.launch` for conversion to `laserscan` msg.
+This node is currently publishing a `pointcloud2` msg. This is because the Sweep device does not use fixed azimuth intervals. For more details see the Sweep [theory of operation](https://support.scanse.io/hc/en-us/articles/115006333327-Theory-of-Operation). Use `sweep2scan.launch` for conversion to `laserscan` msg.
 
 ## Firmware Compatibility:
 Currently, sweep-ros is only compatible with sweep `firmware v1.1` or greater.
