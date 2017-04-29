@@ -1,15 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(sweep_ros)
 
-set(SWEEP_SDK_PATH "sweep-sdk-cpp")
-set(CPP_SERIAL_PATH "sweep-sdk-cpp/src/serial")
-
-FILE(GLOB SWEEP_SDK_SRC
-        "${SWEEP_SDK_PATH}/src/*.cc"
-        "${CPP_SERIAL_PATH}/*.cc"
-        "${CPP_SERIAL_PATH}/arch/*.cc"
-        )
-
 find_package(catkin REQUIRED COMPONENTS
         rosconsole
         roscpp
@@ -18,12 +9,14 @@ find_package(catkin REQUIRED COMPONENTS
         )
 
 find_package(PCL REQUIRED)
+find_package(Sweep REQUIRED)
+find_package(Threads REQUIRED)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra")
 
 include_directories(
 	include ${catkin_INCLUDE_DIRS}
-        ${SWEEP_SDK_PATH}/inc
-        ${SWEEP_SDK_PATH}/inc/serial
-        ${SWEEP_SDK_PATH}/src
         ${PCL_INCLUDE_DIRS}
 )
 
@@ -34,18 +27,14 @@ link_directories(
 
 catkin_package()
 
-add_executable(sweep_node src/node.cpp ${SWEEP_SDK_SRC})
+add_executable(sweep_node src/node.cpp)
 
-target_link_libraries(sweep_node ${catkin_LIBRARIES})
+target_link_libraries(sweep_node ${catkin_LIBRARIES} ${LIBSWEEP_LIBRARY})
 
+target_include_directories(sweep_node SYSTEM PRIVATE ${LIBSWEEP_INCLUDE_DIR})
 
 install(TARGETS sweep_node
         ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-        )
-
-install(DIRECTORY sweep-sdk-cpp
-        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-        USE_SOURCE_PERMISSIONS
         )
