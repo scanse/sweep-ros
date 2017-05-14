@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(sweep_ros)
 
-find_package(catkin REQUIRED COMPONENTS
-        rosconsole
-        roscpp
-        sensor_msgs
-        pcl_msgs
-        pcl_conversions
-        )
+find_package(catkin REQUIRED
+  COMPONENTS
+    rosconsole
+    roscpp
+    sensor_msgs
+    pcl_msgs
+    pcl_conversions
+)
 
 find_package(PCL REQUIRED)
 find_package(Sweep REQUIRED)
@@ -23,10 +24,12 @@ include_directories(
 
 ## Add link directories
 link_directories(
-        ${PCL_LIBRARY_DIRS}
+  ${PCL_LIBRARY_DIRS}
 )
 
-catkin_package()
+catkin_package(
+  CATKIN_DEPENDS sensor_msgs
+)
 
 add_executable(sweep_node src/node.cpp)
 
@@ -38,4 +41,4 @@ install(TARGETS sweep_node
         ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-        )
+)
