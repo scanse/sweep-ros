@@ -3,11 +3,11 @@ project(sweep_ros)
 
 find_package(catkin REQUIRED
   COMPONENTS
+    pcl_conversions
+    pcl_msgs
     rosconsole
     roscpp
     sensor_msgs
-    pcl_msgs
-    pcl_conversions
 )
 
 find_package(PCL REQUIRED)
