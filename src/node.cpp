@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) try
     nh_private.param<std::string>("frame_id", frame_id, "laser_frame");
 
     //Setup Publisher
-    ros::Publisher scan_pub = nh.advertise<sensor_msgs::PointCloud2>(pc2, 1000);
+    ros::Publisher scan_pub = nh.advertise<sensor_msgs::PointCloud2>("pc2", 1000);
 
     //Create Sweep Driver Object
     sweep::sweep device{serial_port.c_str()};
@@ -126,5 +126,5 @@ int main(int argc, char *argv[]) try
 }
 
     catch (const sweep::device_error& e) {
-      ROS_ERROR_STREAM("Error: " << e.what() << std::endl);
+      std::cerr << "Error: " << e.what() << std::endl;
 }
