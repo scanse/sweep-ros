@@ -92,12 +92,8 @@ int main(int argc, char *argv[]) try
     std::string frame_id;
     nh_private.param<std::string>("frame_id", frame_id, "laser_frame");
 
-    //Get topic Parameters
-    std::string topic;
-    nh_private.param<std::string>("topic", topic, "pc2");
-
     //Setup Publisher
-    ros::Publisher scan_pub = nh.advertise<sensor_msgs::PointCloud2>(topic, 1000);
+    ros::Publisher scan_pub = nh.advertise<sensor_msgs::PointCloud2>(pc2, 1000);
 
     //Create Sweep Driver Object
     sweep::sweep device{serial_port.c_str()};
